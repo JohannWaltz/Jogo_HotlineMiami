@@ -4,7 +4,7 @@ import Smile from "./Smile"
 import Enemy from "./Enemy"
 import Hero from "./Hero"
 import hud from "./hud"
-import { loadAudio } from "./loaderAssets"
+import { loadAudio, loadImage } from "./loaderAssets"
 
 const FRAMES = 60
 const smile = new Smile(300, 100, 20, 5, 'yellow')
