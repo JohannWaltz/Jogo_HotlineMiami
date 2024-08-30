@@ -5,24 +5,24 @@ export default class Hero extends Circle {
 
 	constructor(x, y, velocity = 10, width,height, FRAMES = 60) {
 		super(x, y, 0)
-		loadImage('img/goblin.png').then(img=>this.img = img)
+		loadImage('img/Hero_Jacket01.png').then(img=>this.img = img)
 		
-		this.cellWidth = 165	//largura da celular de recorte
-		this.cellHeight = 177	//altura da celula de recorte
+		this.cellWidth = 125	//largura da celula de recorte
+		this.cellHeight = 112	//altura da celula de recorte
 		this.cellX = 0
 		this.cellY = 0
 		
-		this.totalSprites = 3	//Total de sprites
-		this.spriteSpeed = 1
+		this.totalSprites = 2	//Total de sprites
+		this.spriteSpeed = 4
 		this.setSprites()
 		this.controlSprite(FRAMES)
 
 		this.width = width
 		this.height = height
-		this.size = this.width/2
+		this.size = this.width/3
 
 		this.speed = velocity*this.spriteSpeed
-		this.status = 'down'
+		this.status = 'left'
 		
 		this.showHit = true;
 		this.setHit()
@@ -65,9 +65,9 @@ export default class Hero extends Circle {
 
 	setSprites(){
 		this.sprites = {
-			'down': 0,
+			'down': 3*this.cellHeight,
 			'up': this.cellHeight,
-			'left': 3*this.cellHeight,
+			'left': 0,
 			'right': 2*this.cellHeight
 		}
 	}
