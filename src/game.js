@@ -38,7 +38,7 @@ const init = async () => {
 	scoreSound.volume = .5
 	gameoverSound = await loadAudio('sounds/gameover.wav')
 	gameoverSound.volume = .5
-	themeSound = await loadAudio('sounds/theme.mp3')
+	themeSound = await loadAudio('sounds/02.Hydrogen.mp3')
 	themeSound.volume = .3
 	themeSound.loop = true
 
