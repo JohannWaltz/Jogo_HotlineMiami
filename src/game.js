@@ -17,6 +17,8 @@ let gameover
 let boundaries
 let score
 let anime
+let backgroundImage
+let tangerineImage
 
 let scoreSound
 let themeSound
@@ -34,13 +36,17 @@ const init = async () => {
 	hud(ctx, `Carregando... `, "#f00",canvas.height/2-50)
 		
 
-	scoreSound = await loadAudio('sounds/score.ogg')
+	scoreSound = await loadAudio('sounds/ka-ching.mp3')
 	scoreSound.volume = .5
-	gameoverSound = await loadAudio('sounds/gameover.wav')
+	gameoverSound = await loadAudio('sounds/game-over-retro-arcade-epic-stock-media-1-00-02.mp3')
 	gameoverSound.volume = .5
 	themeSound = await loadAudio('sounds/02.Hydrogen.mp3')
 	themeSound.volume = .3
 	themeSound.loop = true
+
+	backgroundImage = await loadImage('img/street-view.png')
+	tangerineImage = await loadImage('img/dollar.png')
+	
 
 	boundaries = {
 		width: canvas.width,
@@ -79,6 +85,7 @@ const loop = () => {
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height)
 
+		ctx.drawImage(backgroundImage, 15, 0, canvas.width, canvas.height)
 		tangerine.draw(ctx)
 
 		hero.move(boundaries, key)
@@ -96,22 +103,34 @@ const loop = () => {
 			tangerine.restart()
 			console.clear()
 			scoreSound.play()
-			console.count("PONTOS", ++score)
+			console.count("DINHEIRO", ++score)
 		}
 
 		if (gameover) {
 			console.error('DEAD!!!')
-			hud(ctx, `Pontos: ${score}. GAME OVER !! `, "#f00")
+			hud(ctx, `Dinheiro FINAL: $ ${score}00,00. GAME OVER !! `, "#f00")
 			hud(ctx, `Pressione F5 para reiniciar!`, "#f00",canvas.height/2-50)
 			gameoverSound.play()
 			themeSound.pause()
 			cancelAnimationFrame(anime)
 		} else {
-			hud(ctx, `Pontos: ${score}`)
+			hud(ctx, `Dinheiro: $ ${score}00,00`, "#0f0")
 			anime = requestAnimationFrame(loop)
 		}
 
 	}, 1000 / FRAMES)
 }
 
+tangerine.draw = (ctx) => {
+    const spriteWidth = tangerine.size * 4; 
+    const spriteHeight = tangerine.size * 2; 
+
+    ctx.drawImage(
+        tangerineImage, 
+        tangerine.x - spriteWidth / 2, 
+        tangerine.y - spriteHeight / 2, 
+        spriteWidth,
+        spriteHeight  
+    );
+}
 export { init }
