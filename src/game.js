@@ -41,7 +41,7 @@ const init = async () => {
 	gameoverSound = await loadAudio('sounds/game-over-retro-arcade-epic-stock-media-1-00-02.mp3')
 	gameoverSound.volume = .5
 	themeSound = await loadAudio('sounds/02.Hydrogen.mp3')
-	themeSound.volume = .3
+	themeSound.volume = .5
 	themeSound.loop = true
 
 	backgroundImage = await loadImage('img/street-view.png')
@@ -55,7 +55,7 @@ const init = async () => {
 
 	enemies = enemies.map(i => new Enemy(
 		Math.random() * canvas.width,
-		Math.random() * canvas.height, 10, 5, 'red')
+		Math.random() * canvas.height, 10, 5)
 	)
 
 	tangerine.restart = () => {
@@ -85,7 +85,7 @@ const loop = () => {
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-		ctx.drawImage(backgroundImage, 15, 0, canvas.width, canvas.height)
+		ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height)
 		tangerine.draw(ctx)
 
 		hero.move(boundaries, key)

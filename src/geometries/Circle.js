@@ -5,7 +5,7 @@ export default class Circle {
 		this.size = size;
 		this.speed = speed;
 		this.color = color;
-		this.status = 'ArrowRight';
+		this.status = 'ArrowDown';
 		this.line = 3
 	}
 

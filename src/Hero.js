@@ -13,7 +13,7 @@ export default class Hero extends Circle {
 		this.cellY = 0
 		
 		this.totalSprites = 2	//Total de sprites
-		this.spriteSpeed = 2
+		this.spriteSpeed = 1
 		this.setSprites()
 		this.controlSprite(FRAMES)
 
