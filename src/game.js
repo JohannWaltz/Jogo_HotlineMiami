@@ -21,7 +21,7 @@ let boundaries
 let score
 let anime
 let backgroundImage
-let tangerineImage
+let dollarImage
 
 let scoreSound
 let themeSound
@@ -48,7 +48,7 @@ const init = async () => {
 	themeSound.loop = true
 
 	backgroundImage = await loadImage('img/street-view.png')
-	tangerineImage = await loadImage('img/dollar.png')
+	dollarImage = await loadImage('img/dollar.png')
 	
 
 	boundaries = {
@@ -129,16 +129,18 @@ const loop = () => {
 	}, 1000 / FRAMES)
 }
 
-tangerines.draw = (ctx) => {
-    const spriteWidth = tangerines.size * 4; 
-    const spriteHeight = tangerines.size * 2; 
-debugger
-    ctx.drawImage(
-        tangerineImage, 
-        tangerines.x - spriteWidth / 2, 
-        tangerines.y - spriteHeight / 2, 
-        spriteWidth,
-        spriteHeight  
-    );
-}
+tangerines.forEach(tangerine => {
+    tangerine.draw = (ctx) => {
+        const spriteWidth = tangerine.size * 4; 
+        const spriteHeight = tangerine.size * 2; 
+
+        ctx.drawImage(
+            dollarImage, 
+            tangerine.x - spriteWidth / 2, 
+            tangerine.y - spriteHeight / 2, 
+            spriteWidth,
+            spriteHeight  
+        );
+    };
+});
 export { init }
