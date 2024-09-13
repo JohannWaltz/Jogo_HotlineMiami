@@ -9,7 +9,10 @@ import { loadAudio, loadImage } from "./loaderAssets"
 const FRAMES = 60
 const smile = new Smile(300, 100, 20, 5, 'yellow')
 const hero = new Hero(300, 100, 4, 82, 89, FRAMES)
-const tangerine = new Circle(200, 200, 10, 5, 'orange')
+const tangerines = [
+    new Circle(200, 200, 10, 5, 'orange'),
+    new Circle(400, 300, 10, 5, 'orange')
+];
 let enemies = Array.from({ length: 3 });
 let ctx
 let canvas
@@ -57,11 +60,14 @@ const init = async () => {
 		Math.random() * canvas.width,
 		Math.random() * canvas.height, 10, 5)
 	)
-
-	tangerine.restart = () => {
+	
+	tangerines.forEach(tangerine=>{
+		tangerine.restart = () => {
 		tangerine.x = tangerine.size + Math.random() * (boundaries.width - tangerine.size)
 		tangerine.y = tangerine.size + Math.random() * (boundaries.height - tangerine.size)
-	}
+		// debugger;
+		}
+	})
 
 	keyPress(window)
 	start()
@@ -86,7 +92,16 @@ const loop = () => {
 		ctx.clearRect(0, 0, canvas.width, canvas.height)
 
 		ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height)
-		tangerine.draw(ctx)
+		
+		tangerines.forEach(tangerines =>{
+			tangerines.draw(ctx)
+			if (smile.colide(tangerines) || hero.colide(tangerines)) {
+				tangerines.restart()
+				console.clear()
+				scoreSound.play()
+				console.count("DINHEIRO", ++score)
+			}})
+		// debugger
 
 		hero.move(boundaries, key)
 		hero.draw(ctx)
@@ -98,13 +113,6 @@ const loop = () => {
 				? hero.colide(e)
 				: true
 		})
-
-		if (smile.colide(tangerine) || hero.colide(tangerine)) {
-			tangerine.restart()
-			console.clear()
-			scoreSound.play()
-			console.count("DINHEIRO", ++score)
-		}
 
 		if (gameover) {
 			console.error('DEAD!!!')
@@ -121,14 +129,14 @@ const loop = () => {
 	}, 1000 / FRAMES)
 }
 
-tangerine.draw = (ctx) => {
-    const spriteWidth = tangerine.size * 4; 
-    const spriteHeight = tangerine.size * 2; 
-
+tangerines.draw = (ctx) => {
+    const spriteWidth = tangerines.size * 4; 
+    const spriteHeight = tangerines.size * 2; 
+debugger
     ctx.drawImage(
         tangerineImage, 
-        tangerine.x - spriteWidth / 2, 
-        tangerine.y - spriteHeight / 2, 
+        tangerines.x - spriteWidth / 2, 
+        tangerines.y - spriteHeight / 2, 
         spriteWidth,
         spriteHeight  
     );
