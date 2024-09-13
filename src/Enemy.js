@@ -9,9 +9,11 @@ export default class Enemy extends Circle {
 		loadImage('img/enemy.png').then(img => this.img = img);
 
 		// Sprite sheet properties
+		this.frameWidth = 36;  // Width of a single frame
+		this.frameHeight = 40; // Height of a single frame
 		this.spriteWidth = size * 4;  // Original width of one frame
 		this.spriteHeight = size * 4; // Original height of one frame
-		this.totalFrames = 2;        // Number of frames in the sprite sheet row
+		this.totalFrames = 4;        // Number of frames in the sprite sheet row
 		this.currentFrame = 0;       // Current frame to be displayed
 		this.frameSpeed = 10;        // Frame speed for animation (higher is slower)
 		this.frameCounter = 0;       // Counter to control frame switching
